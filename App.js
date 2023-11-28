@@ -1,15 +1,14 @@
-// App.js
 import React from 'react';
-import TransactionList from './TransactionList';
+import BankOfFlatiron from './BankOfFlatiron';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Bank Transaction App</h1>
+        <h1>Bank Of Flatiron</h1>
       </header>
       <main>
-        <TransactionList />
+        <BankOfFlatiron />
       </main>
     </div>
   );

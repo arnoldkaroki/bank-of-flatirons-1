@@ -114,3 +114,36 @@ const TransactionList = () => {
 };
 
 export default TransactionList;
+
+const [sortBy, setSortBy] = useState(null);
+
+const handleSort = (field) => {
+  setSortBy(field);
+};
+
+const sortedTransactions = sortBy
+  ? [...filteredTransactions].sort((a, b) => (a[sortBy] > b[sortBy] ? 1 : -1))
+  : filteredTransactions;
+
+// Add the sorting buttons to the table header
+<th onClick={() => handleSort('date')}>Date</th>
+<th onClick={() => handleSort('description')}>Description</th>
+<th onClick={() => handleSort('category')}>Category</th>
+<th onClick={() => handleSort('amount')}>Amount</th>
+
+const handleDelete = async (id) => {
+  try {
+    await axios.delete(`http://localhost:8001/transactions/${id}`);
+    setTransactions(transactions.filter((transaction) => transaction.id !== id));
+  } catch (error) {
+    console.error('Error deleting transaction:', error);
+  }
+};
+
+// Add a delete button to each transaction row
+<tr key={transaction.id}>
+  {/* other columns */}
+  <td>
+    <button onClick={() => handleDelete(transaction.id)}>Delete</button>
+  </td>
+</tr>
